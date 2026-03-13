@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miyeokguk - Korean Seaweed Soup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #faf8f5;
+      color: #3a3a3a;
+      line-height: 1.7;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      height: 85vh;
+      min-height: 500px;
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.1) 0%,
+        rgba(0,0,0,0.35) 100%
+      ),
+      url('https://images.unsplash.com/photo-1583224994076-0e5d24e13756?w=1400&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      padding: 60px 40px;
+    }
+
+    .hero-text {
+      max-width: 700px;
+      color: #fff;
+    }
+
+    .hero-text .korean {
+      font-size: 1rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 12px;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .hero-text .subtitle {
+      font-size: 1.15rem;
+      font-weight: 300;
+      opacity: 0.9;
+      max-width: 520px;
+    }
+
+    /* Content wrapper */
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    /* Section titles */
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #b08968;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #2c2c2c;
+      margin-bottom: 28px;
+    }
+
+    /* Story section */
+    .story {
+      margin-bottom: 70px;
+    }
+
+    .story p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      margin-bottom: 20px;
+      color: #4a4a4a;
+    }
+
+    .story .highlight {
+      background: linear-gradient(180deg, transparent 60%, #f0dcc8 60%);
+      padding: 0 2px;
+      font-weight: 400;
+    }
+
+    /* Divider */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: #b08968;
+      margin: 60px 0;
+    }
+
+    /* Info cards */
+    .info-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 70px;
+    }
+
+    .info-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+    }
+
+    .info-card .icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .info-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      color: #2c2c2c;
+    }
+
+    .info-card p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: #666;
+    }
+
+    /* Recipe section */
+    .recipe-section {
+      background: #fff;
+      border-radius: 20px;
+      padding: 48px 40px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+      margin-bottom: 70px;
+    }
+
+    .recipe-meta {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .recipe-meta-item {
+      text-align: center;
+    }
+
+    .recipe-meta-item .value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #b08968;
+    }
+
+    .recipe-meta-item .label {
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    .recipe-columns {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 48px;
+    }
+
+    .ingredients h3, .instructions h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #2c2c2c;
+    }
+
+    .ingredients ul {
+      list-style: none;
+    }
+
+    .ingredients li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f2ee;
+      font-size: 0.95rem;
+      font-weight: 300;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .ingredients li .amount {
+      color: #b08968;
+      font-weight: 400;
+      white-space: nowrap;
+      margin-left: 16px;
+    }
+
+    .instructions ol {
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .instructions li {
+      counter-increment: steps;
+      padding: 14px 0;
+      padding-left: 44px;
+      position: relative;
+      font-size: 0.95rem;
+      font-weight: 300;
+      border-bottom: 1px solid #f5f2ee;
+    }
+
+    .instructions li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 28px;
+      height: 28px;
+      background: #faf3ec;
+      color: #b08968;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    /* Photo grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 70px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .photo-grid img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-grid .wide {
+      grid-column: 1 / -1;
+      height: 360px;
+    }
+
+    /* Tips */
+    .tips {
+      background: linear-gradient(135deg, #faf3ec 0%, #f5ebe0 100%);
+      border-radius: 16px;
+      padding: 36px 32px;
+      margin-bottom: 70px;
+    }
+
+    .tips h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      color: #2c2c2c;
+    }
+
+    .tips ul {
+      list-style: none;
+    }
+
+    .tips li {
+      padding: 8px 0;
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: #555;
+    }
+
+    .tips li::before {
+      content: "\2022";
+      color: #b08968;
+      font-weight: bold;
+      display: inline-block;
+      width: 1.2em;
+    }
+
+    /* Note to Alejandro */
+    .note {
+      text-align: center;
+      padding: 60px 20px;
+      margin-bottom: 40px;
+    }
+
+    .note .heart {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .note p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: #666;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .note .from {
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-size: 0.9rem;
+      color: #b08968;
+      margin-top: 24px;
+      letter-spacing: 2px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.8rem;
+      color: #bbb;
+      letter-spacing: 1px;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero { height: 60vh; padding: 40px 24px; }
+      .info-cards { grid-template-columns: 1fr; }
+      .recipe-columns { grid-template-columns: 1fr; }
+      .recipe-section { padding: 32px 24px; }
+      .recipe-meta { gap: 24px; }
+      .photo-grid img { height: 200px; }
+      .photo-grid .wide { height: 240px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-text">
+      <div class="korean">미역국 &mdash; miyeokguk</div>
+      <h1>Korean Seaweed Soup</h1>
+      <p class="subtitle">The first meal of every birthday morning. A warm embrace in a bowl, passed down through generations.</p>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- The Story -->
+    <div class="story">
+      <div class="section-label">The Tradition</div>
+      <h2>Why Koreans Eat This on Birthdays</h2>
+
+      <p>
+        In Korea, your birthday doesn't start with cake. It starts with a steaming bowl of <span class="highlight">miyeokguk</span> &mdash; a simple, nourishing seaweed soup that carries a meaning far deeper than its humble ingredients suggest.
+      </p>
+
+      <p>
+        The tradition begins with mothers. After giving birth, Korean women eat miyeokguk for weeks &mdash; sometimes daily for 21 days or more. Miyeok (dried seaweed) is rich in <span class="highlight">iron, calcium, and iodine</span>, nutrients that help the body recover, replenish blood, and support milk production. For centuries, it has been considered the most important postpartum food in Korean culture, believed to cleanse the body and restore a mother's strength.
+      </p>
+
+      <p>
+        So every year on your birthday, when you sit down to a bowl of miyeokguk, you are not just eating breakfast. You are <span class="highlight">honoring your mother</span> &mdash; remembering the meal she ate to heal and nourish herself so she could nourish you. It's a quiet act of gratitude. A reminder that you exist because someone loved you enough to bring you into the world.
+      </p>
+
+      <p>
+        That's why, even today, the first thing a Korean person hears on their birthday is often not "happy birthday" but <em>"did you eat your miyeokguk?"</em>
+      </p>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="icon">&#x1F930;</div>
+        <h3>For New Mothers</h3>
+        <p>Eaten daily for 21+ days after childbirth. The seaweed's high iodine and iron content helps recovery, supports lactation, and is gentle on the digestive system during the postpartum period.</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">&#x1F382;</div>
+        <h3>On Every Birthday</h3>
+        <p>Each birthday bowl is a tribute to your mother's sacrifice. It's the Korean way of saying: "I remember what you went through to give me life." Skipping it on your birthday is almost unthinkable.</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">&#x1F331;</div>
+        <h3>A Healing Food</h3>
+        <p>Miyeok is a natural superfood &mdash; packed with calcium (more than milk), iron, omega-3 fatty acids, and antioxidants. It detoxifies, reduces inflammation, and supports thyroid health.</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">&#x2764;&#xFE0F;</div>
+        <h3>Comfort in a Bowl</h3>
+        <p>Beyond tradition, miyeokguk is simply one of the most comforting soups you'll ever taste &mdash; warm, savory, silky, and deeply satisfying. It feels like being taken care of.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Photo grid -->
+    <div class="photo-grid">
+      <img class="wide" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=1200&q=80" alt="Korean table setting">
+      <img src="https://images.unsplash.com/photo-1567337710282-00832b415979?w=600&q=80" alt="Dried seaweed">
+      <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="Cooking">
+    </div>
+
+    <!-- Recipe -->
+    <div class="recipe-section">
+      <div class="section-label">The Recipe</div>
+      <h2>Beef Miyeokguk</h2>
+
+      <div class="recipe-meta">
+        <div class="recipe-meta-item">
+          <div class="value">15 min</div>
+          <div class="label">Prep</div>
+        </div>
+        <div class="recipe-meta-item">
+          <div class="value">40 min</div>
+          <div class="label">Cook</div>
+        </div>
+        <div class="recipe-meta-item">
+          <div class="value">4</div>
+          <div class="label">Servings</div>
+        </div>
+        <div class="recipe-meta-item">
+          <div class="value">Easy</div>
+          <div class="label">Difficulty</div>
+        </div>
+      </div>
+
+      <div class="recipe-columns">
+        <div class="ingredients">
+          <h3>Ingredients</h3>
+          <ul>
+            <li>Dried miyeok (seaweed) <span class="amount">1 oz / 30g</span></li>
+            <li>Beef brisket or stew meat, cubed <span class="amount">6 oz / 170g</span></li>
+            <li>Sesame oil <span class="amount">1 tbsp</span></li>
+            <li>Minced garlic <span class="amount">1 tbsp</span></li>
+            <li>Soy sauce (soup soy sauce) <span class="amount">2 tbsp</span></li>
+            <li>Water <span class="amount">8 cups</span></li>
+            <li>Salt <span class="amount">to taste</span></li>
+            <li>Ground black pepper <span class="amount">pinch</span></li>
+          </ul>
+        </div>
+
+        <div class="instructions">
+          <h3>Instructions</h3>
+          <ol>
+            <li><strong>Soak the seaweed.</strong> Place the dried miyeok in a large bowl of cold water for 15&ndash;20 minutes. It will expand 5&ndash;6 times its size. Drain, gently squeeze out excess water, and cut into bite-sized pieces if the strands are very long.</li>
+            <li><strong>Season the beef.</strong> Toss the cubed beef with 1 tablespoon of soy sauce and a pinch of pepper. Let it sit while the seaweed soaks.</li>
+            <li><strong>Saut&eacute; the beef.</strong> Heat sesame oil in a heavy pot over medium-high heat. Add the beef and sear until lightly browned on all sides, about 3&ndash;4 minutes.</li>
+            <li><strong>Add garlic and seaweed.</strong> Add the minced garlic and drained miyeok to the pot. Stir-fry together for 2&ndash;3 minutes until the seaweed is coated in oil and slightly translucent.</li>
+            <li><strong>Add water and simmer.</strong> Pour in 8 cups of water. Bring to a boil, then reduce heat to medium-low. Cover and simmer for 30&ndash;40 minutes. The longer it simmers, the richer and more savory the broth becomes.</li>
+            <li><strong>Season.</strong> Add the remaining 1 tablespoon of soy sauce. Taste and adjust with salt. The broth should be clean, savory, and slightly briny from the seaweed.</li>
+            <li><strong>Serve hot</strong> in deep bowls with steamed white rice on the side. In Korea, you eat this first thing in the morning &mdash; before anything else on your birthday.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips">
+      <h3>Tips for the Best Miyeokguk</h3>
+      <ul>
+        <li>Use <strong>soup soy sauce</strong> (gukganjang) if you can find it &mdash; it's lighter in color and saltier than regular soy sauce, keeping the broth clear</li>
+        <li>Don't skip the sesame oil saut&eacute; step &mdash; it's what gives the soup its signature nutty depth</li>
+        <li>The soup tastes even better the next day as the flavors meld overnight</li>
+        <li>For a lighter version, substitute beef with shrimp or clams &mdash; coastal Korean families often make it with seafood</li>
+        <li>Some families add a beaten egg in the last minute for extra richness</li>
+        <li>Miyeok is available at any Asian grocery store &mdash; look for the dried, dark green sheets in the seaweed aisle</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Note -->
+    <div class="note">
+      <div class="heart">&#x1F375;</div>
+      <p>
+        Happy Birthday, Alejandro.<br>
+        Here's a bowl of warmth, history, and love &mdash; the way Koreans have celebrated life for centuries.
+      </p>
+      <div class="from">WITH LOVE FROM SUYEOL</div>
+    </div>
+
+  </div>
+
+  <footer>
+    From Suyeol, for Alejandro's Birthday &bull; Made with love
+  </footer>
+
+</body>
+</html>
